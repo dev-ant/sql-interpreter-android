@@ -4,4 +4,10 @@
     <dimen name="textview_width">150dp</dimen>
     <dimen name="ball_radius">30dp</dimen>
     <dimen name="font_size">16sp</dimen>
+
+    <!-- padding values -->
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="medium_padding">12dp</dimen>
+    <dimen name="large_padding">16dp</dimen>
+
 </resources>
