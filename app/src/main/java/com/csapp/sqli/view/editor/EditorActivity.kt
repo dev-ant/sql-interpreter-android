@@ -8,7 +8,6 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.csapp.sqli.R
-import java.lang.StringBuilder
 
 class EditorActivity : AppCompatActivity() {
 
@@ -36,6 +35,7 @@ class EditorActivity : AppCompatActivity() {
             }
         })
     }
+
     private fun getLineCount(text: String): Int {
         val layout: Layout = editText.layout
         val text = editText.text
@@ -44,7 +44,7 @@ class EditorActivity : AppCompatActivity() {
 
     private fun setEditorLiner(count: Int) {
         var stringBuilder = StringBuilder()
-        for(i in 1..count) {
+        for (i in 1..count) {
             stringBuilder.append("$i\n")
         }
 
