@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">SQlI</string>
     <string name="editor_hint">Type query here</string>
+    <string name="result_grid">Result Grid</string>
+    <string name="action_output">Action Output</string>
 
     <!--Numbers-->
     <string name="one">1</string>

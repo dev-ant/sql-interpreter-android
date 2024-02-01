@@ -10,6 +10,7 @@
 
     <!-- SQLI Light Gray Theme Palette -->
     <color name="background">#FF2B2B2B</color>
+    <color name="annotation">#555555</color>
     <color name="text">#FFE6E1DC</color>
     <color name="constant">#FF6897BB</color>
     <color name="value">#FF6A9955</color>
