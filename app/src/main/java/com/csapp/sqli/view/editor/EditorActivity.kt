@@ -43,7 +43,7 @@ class EditorActivity : AppCompatActivity() {
     }
 
     private fun setEditorLiner(count: Int) {
-        var stringBuilder = StringBuilder()
+        val stringBuilder = StringBuilder()
         for (i in 1..count) {
             stringBuilder.append("$i\n")
         }
