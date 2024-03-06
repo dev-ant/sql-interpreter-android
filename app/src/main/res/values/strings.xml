@@ -19,4 +19,6 @@
     <string name="sample_statement_line_break_1">SELECT * \nFROM users \nWHERE age > 18;</string>
     <string name="sample_statement_line_break_2">SELECT * \nFROM users \nINNER JOIN orders ON users.id = orders.user_id;</string>
     <string name="sample_statement_line_break_3">SELECT users.name, orders.order_id \nFROM users \nINNER JOIN orders ON users.id = orders.user_id \nWHERE orders.status = \'FINISHED\';</string>
+    <string name="check">CHECK</string>
+    <string name="run">RUN</string>
 </resources>

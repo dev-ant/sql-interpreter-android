@@ -82,34 +82,32 @@
         app:layout_constraintVertical_weight="2">
 
         <LinearLayout
-            android:paddingHorizontal="@dimen/medium_padding"
             android:id="@+id/llayout_result_selector"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/medium_padding">
 
-            <TextView
-                android:id="@+id/textview_result_grid"
+            <Button
+                android:id="@+id/btn_query_editor_run"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_padding"
-                android:text="@string/result_grid"
-                android:textColor="@color/annotation"
-                android:textSize="@dimen/small_font_size" />
-
-            <TextView
-                android:id="@+id/textview_action_output"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_padding"
-                android:text="@string/action_output"
-                android:textColor="@color/annotation"
-                android:textSize="@dimen/small_font_size" />
+                android:layout_gravity="right"
+                android:text="@string/run" />
 
         </LinearLayout>
+
         <View
-            android:background="@color/annotation"
             android:layout_width="match_parent"
-            android:layout_height="1dp"/>
+            android:layout_height="1dp"
+            android:background="@color/annotation" />
+
+        <TextView
+            android:id="@+id/textview_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/medium_padding"
+            android:paddingStart="@dimen/large_padding"
+            android:textSize="@dimen/small_font_size" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
