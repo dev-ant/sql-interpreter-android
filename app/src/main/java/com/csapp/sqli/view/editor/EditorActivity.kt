@@ -4,21 +4,28 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.Layout
 import android.text.TextWatcher
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.csapp.sqli.DatabaseHelper
 import com.csapp.sqli.R
 
 class EditorActivity : AppCompatActivity() {
 
     private lateinit var editText: EditText
     private lateinit var textView: TextView
+    private lateinit var buttonRun: Button
+    private lateinit var databaseHelper: DatabaseHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editor)
 
         editText = findViewById(R.id.edittext_query_editor)
         textView = findViewById(R.id.textview_query_editor_liner)
+        buttonRun = findViewById(R.id.btn_query_editor_run)
+        databaseHelper = DatabaseHelper(this)
 
         editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -34,6 +41,10 @@ class EditorActivity : AppCompatActivity() {
                 setEditorLiner(lineCount)
             }
         })
+
+        buttonRun.setOnClickListener {
+            databaseHelper.execQuery(editText.text.toString())
+        }
     }
 
     private fun getLineCount(text: String): Int {

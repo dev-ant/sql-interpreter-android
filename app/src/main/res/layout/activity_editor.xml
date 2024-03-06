@@ -89,7 +89,7 @@
             android:paddingHorizontal="@dimen/medium_padding">
 
             <Button
-                android:id="@+id/btn_editor_run"
+                android:id="@+id/btn_query_editor_run"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
