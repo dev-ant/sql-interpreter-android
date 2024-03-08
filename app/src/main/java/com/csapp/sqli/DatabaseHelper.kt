@@ -4,25 +4,25 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.provider.BaseColumns
 import android.util.Log
 
-class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class DatabaseHelper(context: Context?) :
+    SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+
     override fun onCreate(p0: SQLiteDatabase?) {
         // Not yet implemented
-        val sql = "CREATE TABLE SAMPLE (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT"
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
         // Not yet implemented
     }
 
-    fun execQuery(sql: String) {
-        if(sql.startsWith("SELECT")) {
+    fun execQuery(sql: String): Cursor? {
+        return if (sql.startsWith("SELECT")) {
             execQueryReturn(sql)
-        }
-        else {
+        } else {
             execQueryNoReturn(sql)
+            null
         }
     }
 
@@ -38,16 +38,15 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         }
     }
 
-    private fun execQueryReturn(sql: String) {
+    private fun execQueryReturn(sql: String): Cursor? {
         val database = this.readableDatabase
-        try {
-            val cursor: Cursor? = database.rawQuery(sql, null)
+        return try {
+            val cursor = database.rawQuery(sql, null)
             Log.i(TAG, MSG.SUCCESS)
-            cursor?.close()
+            cursor
         } catch (e: Exception) {
             Log.e(TAG, MSG.ERROR + "${e.message}")
-        } finally {
-            database.close()
+            null
         }
     }
 
