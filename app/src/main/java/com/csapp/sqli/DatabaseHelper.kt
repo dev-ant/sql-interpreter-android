@@ -1,5 +1,6 @@
 package com.csapp.sqli
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
@@ -17,28 +18,22 @@ class DatabaseHelper(context: Context?) :
         // Not yet implemented
     }
 
-    fun execQuery(sql: String): Cursor? {
-        return if (sql.startsWith("SELECT")) {
-            execQueryReturn(sql)
-        } else {
-            execQueryNoReturn(sql)
-            null
-        }
-    }
 
-    private fun execQueryNoReturn(sql: String) {
+    fun execQueryNoReturn(sql: String): String {
         val database = this.writableDatabase
-        try {
+        return try {
             database.execSQL(sql)
-            Log.i(TAG, MSG.SUCCESS)
+            Log.i(TAG, MSG.SUCCESS + sql)
+            MSG.SUCCESS
         } catch (e: Exception) {
-            Log.e(TAG, MSG.ERROR + "${e.message}")
+            Log.e(TAG, MSG.ERROR + e.message)
+            MSG.ERROR + e.message
         } finally {
             database.close()
         }
     }
 
-    private fun execQueryReturn(sql: String): Cursor? {
+    fun execQueryReturn(sql: String): Cursor? {
         val database = this.readableDatabase
         return try {
             val cursor = database.rawQuery(sql, null)

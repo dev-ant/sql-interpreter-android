@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.Layout
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TableLayout
@@ -43,19 +44,26 @@ class EditorActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                val lineCount = getLineCount(editText.text.toString())
+                val lineCount = getLineCount()
                 setEditorLiner(lineCount)
             }
         })
 
         buttonRun.setOnClickListener {
-            databaseHelper.execQuery(editText.text.toString())?.let { cursor ->
-                displayResult(cursor)
+            val sql = editText.text.toString()
+            if (sql.startsWith("SELECT")) {
+                databaseHelper.execQueryReturn(editText.text.toString())?.let { cursor ->
+                    displayResult(cursor)
+                    cursor.close()
+                }
+            } else {
+                Log.i("DB_HELPER", "msg")
+                displayMessage(databaseHelper.execQueryNoReturn(sql))
             }
         }
     }
 
-    private fun getLineCount(text: String): Int {
+    private fun getLineCount(): Int {
         val layout: Layout = editText.layout
         val text = editText.text
         return layout.getLineForOffset(text.length) + 1
@@ -96,5 +104,26 @@ class EditorActivity : AppCompatActivity() {
             }
             tableResult.addView(dataRow)
         }
+    }
+
+    private fun displayMessage(msg: String) {
+        tableResult.removeAllViews()
+        val row = TableRow(this)
+        val textView = TextView(this)
+        textView.text = msg
+        textView.textSize = 24f
+        textView.maxLines = Int.MAX_VALUE
+        textView.isSingleLine = false
+
+        val screenWidth = resources.displayMetrics.widthPixels
+        val params = TableRow.LayoutParams(
+            screenWidth,
+            TableRow.LayoutParams.WRAP_CONTENT
+        )
+        textView.layoutParams = params
+
+        row.setPadding(10, 10, 10, 10)
+        row.addView(textView)
+        tableResult.addView(row)
     }
 }
