@@ -102,12 +102,12 @@
             android:layout_height="1dp"
             android:background="@color/annotation" />
 
-        <TextView
-            android:id="@+id/textview_result"
+        <TableLayout
+            android:id="@+id/table_query_execute_result"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/medium_padding"
-            android:paddingStart="@dimen/large_padding"
-            android:textSize="@dimen/small_font_size" />
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:stretchColumns="*" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
