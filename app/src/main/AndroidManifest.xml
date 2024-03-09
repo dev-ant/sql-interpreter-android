@@ -21,7 +21,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".view.editor.EditorActivity"
+            android:name=".view.EditorActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat"
             android:windowSoftInputMode="adjustNothing">
