@@ -33,7 +33,8 @@ class DatabaseHelper(context: Context?) :
         }
     }
 
-    fun execQueryReturn(sql: String): Cursor? {
+    @SuppressLint("Recycle")
+    fun execQueryReturn(sql: String): Any {
         val database = this.readableDatabase
         return try {
             val cursor = database.rawQuery(sql, null)
@@ -41,7 +42,7 @@ class DatabaseHelper(context: Context?) :
             cursor
         } catch (e: Exception) {
             Log.e(TAG, MSG.ERROR + "${e.message}")
-            null
+            MSG.ERROR + e.message
         }
     }
 
