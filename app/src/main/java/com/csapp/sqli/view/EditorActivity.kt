@@ -56,6 +56,21 @@ class EditorActivity : AppCompatActivity() {
         }
     }
 
+    private fun TableRow.addViewWithParams(view: TextView) {
+        val screenWidth = resources.displayMetrics.widthPixels
+        val params = TableRow.LayoutParams(
+            screenWidth,
+            TableRow.LayoutParams.WRAP_CONTENT
+        )
+        view.layoutParams = params
+        this.addView(view)
+    }
+
+    private fun TextView.applyCommonProperties() {
+        textSize = DEFAULT_TEXT_SIZE
+        setPadding(DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING)
+    }
+
     private fun getLineCount(): Int {
         val layout: Layout = binding.edittextQueryEditor.layout
         val text = binding.edittextQueryEditor.text
@@ -89,8 +104,7 @@ class EditorActivity : AppCompatActivity() {
         for (column in columns) {
             val textView = TextView(this)
             textView.text = column
-            textView.textSize = DEFAULT_TEXT_SIZE
-            headerRow.setPadding(DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING)
+            textView.applyCommonProperties()
             headerRow.addView(textView)
         }
         binding.tableQueryExecuteResult.addView(headerRow)
@@ -100,7 +114,7 @@ class EditorActivity : AppCompatActivity() {
             for (column in columns) {
                 val textView = TextView(this)
                 textView.text = cursor.getString(cursor.getColumnIndex(column))
-                textView.textSize = DEFAULT_TEXT_SIZE
+                textView.applyCommonProperties()
                 dataRow.setPadding(DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING)
                 dataRow.addView(textView)
             }
@@ -113,19 +127,11 @@ class EditorActivity : AppCompatActivity() {
         val row = TableRow(this)
         val textView = TextView(this)
         textView.text = msg
-        textView.textSize = DEFAULT_TEXT_SIZE
+        textView.applyCommonProperties()
         textView.maxLines = Int.MAX_VALUE
         textView.isSingleLine = false
-
-        val screenWidth = resources.displayMetrics.widthPixels
-        val params = TableRow.LayoutParams(
-            screenWidth,
-            TableRow.LayoutParams.WRAP_CONTENT
-        )
-        textView.layoutParams = params
-
         row.setPadding(DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING)
-        row.addView(textView)
+        row.addViewWithParams(textView)
         binding.tableQueryExecuteResult.addView(row)
     }
 }
