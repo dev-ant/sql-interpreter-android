@@ -19,6 +19,11 @@ class EditorActivity : AppCompatActivity() {
     private lateinit var databaseHelper: DatabaseHelper
     private lateinit var viewModel: EditorViewModel
 
+    companion object {
+        private const val DEFAULT_TEXT_SIZE = 24f
+        private const val DEFAULT_PADDING = 10
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditorBinding.inflate(layoutInflater)
@@ -84,8 +89,8 @@ class EditorActivity : AppCompatActivity() {
         for (column in columns) {
             val textView = TextView(this)
             textView.text = column
-            textView.textSize = 24f
-            headerRow.setPadding(10, 10, 10, 10)
+            textView.textSize = DEFAULT_TEXT_SIZE
+            headerRow.setPadding(DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING)
             headerRow.addView(textView)
         }
         binding.tableQueryExecuteResult.addView(headerRow)
@@ -95,8 +100,8 @@ class EditorActivity : AppCompatActivity() {
             for (column in columns) {
                 val textView = TextView(this)
                 textView.text = cursor.getString(cursor.getColumnIndex(column))
-                textView.textSize = 24f
-                dataRow.setPadding(10, 10, 10, 10)
+                textView.textSize = DEFAULT_TEXT_SIZE
+                dataRow.setPadding(DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING)
                 dataRow.addView(textView)
             }
             binding.tableQueryExecuteResult.addView(dataRow)
@@ -108,7 +113,7 @@ class EditorActivity : AppCompatActivity() {
         val row = TableRow(this)
         val textView = TextView(this)
         textView.text = msg
-        textView.textSize = 24f
+        textView.textSize = DEFAULT_TEXT_SIZE
         textView.maxLines = Int.MAX_VALUE
         textView.isSingleLine = false
 
@@ -119,7 +124,7 @@ class EditorActivity : AppCompatActivity() {
         )
         textView.layoutParams = params
 
-        row.setPadding(10, 10, 10, 10)
+        row.setPadding(DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING)
         row.addView(textView)
         binding.tableQueryExecuteResult.addView(row)
     }
