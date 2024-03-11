@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
 
-    tools:context=".view.editor.EditorActivity">
+    tools:context=".view.EditorActivity">
 
     <ScrollView
         android:id="@+id/scrollview_query_editor_container"

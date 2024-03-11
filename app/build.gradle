@@ -20,7 +20,11 @@ android {
         }
     }
 
-    buildTypes {
+    viewBinding {
+        enabled = true
+    }
+
+        buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -78,7 +82,7 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
-    // Set room library dependencies
+    // Set up room library dependencies
     def room_version = "2.6.1"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
@@ -87,4 +91,7 @@ dependencies {
     implementation "androidx.room:room-guava:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
     implementation "androidx.room:room-paging:$room_version"
+
+    // Set up about mvvm pattern
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
 }
