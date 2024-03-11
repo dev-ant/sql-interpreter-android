@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.Layout
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TableLayout
@@ -76,10 +75,12 @@ class EditorActivity : AppCompatActivity() {
         textView.text = stringBuilder.toString()
     }
 
-    private fun displayResultOrMessage(result: Any) {
-        when (result) {
-            is Cursor -> displayResult(result)
-            is String -> displayMessage(result)
+    private fun displayResultOrMessage(result: Any?) {
+        result?.let { nonNullResult ->
+            when (nonNullResult) {
+                is Cursor -> displayResult(nonNullResult)
+                is String -> displayMessage(nonNullResult)
+            }
         }
     }
 
