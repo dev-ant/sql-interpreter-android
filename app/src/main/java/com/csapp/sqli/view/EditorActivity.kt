@@ -6,37 +6,28 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.Layout
 import android.text.TextWatcher
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.csapp.sqli.DatabaseHelper
-import com.csapp.sqli.R
+import com.csapp.sqli.databinding.ActivityEditorBinding
 import com.csapp.sqli.viewmodel.EditorViewModel
 
 class EditorActivity : AppCompatActivity() {
 
-    private lateinit var editText: EditText
-    private lateinit var textView: TextView
-    private lateinit var buttonRun: Button
-    private lateinit var tableResult: TableLayout
+    private lateinit var binding: ActivityEditorBinding
     private lateinit var databaseHelper: DatabaseHelper
     private lateinit var viewModel: EditorViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_editor)
+        binding = ActivityEditorBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        editText = findViewById(R.id.edittext_query_editor)
-        textView = findViewById(R.id.textview_query_editor_liner)
-        buttonRun = findViewById(R.id.btn_query_editor_run)
         databaseHelper = DatabaseHelper(this)
-        tableResult = findViewById(R.id.table_query_execute_result)
         viewModel = EditorViewModel(databaseHelper)
 
-        editText.addTextChangedListener(object : TextWatcher {
+        binding.edittextQueryEditor.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 // "Not yet implemented"
             }
@@ -51,8 +42,8 @@ class EditorActivity : AppCompatActivity() {
             }
         })
 
-        buttonRun.setOnClickListener {
-            val sql = editText.text.toString()
+        binding.btnQueryEditorRun.setOnClickListener {
+            val sql = binding.edittextQueryEditor.text.toString()
             val result = viewModel.executeQuery(sql)
             if (result != null) {
                 displayResultOrMessage(result)
@@ -61,8 +52,8 @@ class EditorActivity : AppCompatActivity() {
     }
 
     private fun getLineCount(): Int {
-        val layout: Layout = editText.layout
-        val text = editText.text
+        val layout: Layout = binding.edittextQueryEditor.layout
+        val text = binding.edittextQueryEditor.text
         return layout.getLineForOffset(text.length) + 1
     }
 
@@ -72,7 +63,7 @@ class EditorActivity : AppCompatActivity() {
             stringBuilder.append("$i\n")
         }
 
-        textView.text = stringBuilder.toString()
+        binding.textviewQueryEditorLiner.text = stringBuilder.toString()
     }
 
     private fun displayResultOrMessage(result: Any?) {
@@ -86,7 +77,7 @@ class EditorActivity : AppCompatActivity() {
 
     @SuppressLint("Range")
     private fun displayResult(cursor: Cursor) {
-        tableResult.removeAllViews()
+        binding.tableQueryExecuteResult.removeAllViews()
 
         val headerRow = TableRow(this)
         val columns = cursor.columnNames
@@ -97,7 +88,7 @@ class EditorActivity : AppCompatActivity() {
             headerRow.setPadding(10, 10, 10, 10)
             headerRow.addView(textView)
         }
-        tableResult.addView(headerRow)
+        binding.tableQueryExecuteResult.addView(headerRow)
 
         while (cursor.moveToNext()) {
             val dataRow = TableRow(this)
@@ -108,12 +99,12 @@ class EditorActivity : AppCompatActivity() {
                 dataRow.setPadding(10, 10, 10, 10)
                 dataRow.addView(textView)
             }
-            tableResult.addView(dataRow)
+            binding.tableQueryExecuteResult.addView(dataRow)
         }
     }
 
     private fun displayMessage(msg: String) {
-        tableResult.removeAllViews()
+        binding.tableQueryExecuteResult.removeAllViews()
         val row = TableRow(this)
         val textView = TextView(this)
         textView.text = msg
@@ -130,6 +121,6 @@ class EditorActivity : AppCompatActivity() {
 
         row.setPadding(10, 10, 10, 10)
         row.addView(textView)
-        tableResult.addView(row)
+        binding.tableQueryExecuteResult.addView(row)
     }
 }
