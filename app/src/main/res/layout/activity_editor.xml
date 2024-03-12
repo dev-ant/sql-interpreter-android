@@ -102,12 +102,17 @@
             android:layout_height="1dp"
             android:background="@color/annotation" />
 
-        <TableLayout
-            android:id="@+id/table_query_execute_result"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:stretchColumns="*" />
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/table_query_execute_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:stretchColumns="*" />
+        </ScrollView>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
