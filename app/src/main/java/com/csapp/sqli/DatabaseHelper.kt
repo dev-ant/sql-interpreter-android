@@ -17,7 +17,6 @@ class DatabaseHelper(context: Context?) :
         // Not yet implemented
     }
 
-
     fun execQueryNoReturn(sql: String): String {
         val database = this.writableDatabase
         return try {

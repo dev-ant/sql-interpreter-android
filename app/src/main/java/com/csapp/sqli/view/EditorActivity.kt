@@ -44,9 +44,7 @@ class EditorActivity : AppCompatActivity() {
         binding.btnQueryEditorRun.setOnClickListener {
             val sql = binding.edittextQueryEditor.text.toString()
             val result = viewModel.executeQuery(sql)
-            if (result != null) {
-                EditorUtils.displayResultOrMessage(binding, result)
-            }
+            EditorUtils.displayResultOrMessage(binding, result)
         }
     }
 }

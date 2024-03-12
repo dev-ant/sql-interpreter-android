@@ -7,6 +7,7 @@ import android.widget.TextView
 import com.csapp.sqli.databinding.ActivityEditorBinding
 import com.csapp.sqli.utils.ViewUtils.addViewWithParams
 import com.csapp.sqli.utils.ViewUtils.applyCommonProperties
+import com.csapp.sqli.utils.ViewUtils.applyScreenWidth
 
 object EditorUtils {
 
@@ -62,9 +63,8 @@ object EditorUtils {
         val row = TableRow(binding.root.context)
         val textView = TextView(binding.root.context)
         textView.applyCommonProperties()
-        textView.maxLines = Int.MAX_VALUE
         textView.text = msg
-        textView.isSingleLine = false
+        textView.applyScreenWidth()
         row.addViewWithParams(textView)
         binding.tableQueryExecuteResult.addView(row)
     }
