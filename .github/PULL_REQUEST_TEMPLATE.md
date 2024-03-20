@@ -1,15 +1,3 @@
----
-name: Pull Request
-about: Create a pull request to contribute to the project
-title: ''
-labels: ''
-assignees: ''
----
-
-## 🔄 Changes Made
-
--
-
 ## 📋 Description
 
 -

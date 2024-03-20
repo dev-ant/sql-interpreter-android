@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">SQlI</string>
+    <string name="editor_hint">Type query here</string>
+    <string name="result_grid">Result Grid</string>
+    <string name="action_output">Action Output</string>
+
+    <!--Numbers-->
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+
+    <!--Sample text-->
+    <string name="greeking">Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survivednot only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+
+    <!--Sample statement-->
+    <string name="sample_statement_1">SELECT * FROM users WHERE age > 18;</string>
+    <string name="sample_statement_2">SELECT * FROM users INNER JOIN orders ON users.id = orders.user_id;</string>
+    <string name="sample_statement_3">SELECT users.name, orders.order_id FROM users INNER JOIN orders ON users.id = orders.user_id WHERE orders.status = \'FINISHED\';</string>
+    <string name="sample_statement_line_break_1">SELECT * \nFROM users \nWHERE age > 18;</string>
+    <string name="sample_statement_line_break_2">SELECT * \nFROM users \nINNER JOIN orders ON users.id = orders.user_id;</string>
+    <string name="sample_statement_line_break_3">SELECT users.name, orders.order_id \nFROM users \nINNER JOIN orders ON users.id = orders.user_id \nWHERE orders.status = \'FINISHED\';</string>
+    <string name="check">CHECK</string>
+    <string name="run">RUN</string>
 </resources>

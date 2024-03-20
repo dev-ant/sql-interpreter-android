@@ -3,5 +3,24 @@
     <dimen name="textview_height">25dp</dimen>
     <dimen name="textview_width">150dp</dimen>
     <dimen name="ball_radius">30dp</dimen>
-    <dimen name="font_size">16sp</dimen>
+
+    <!-- font size -->
+    <dimen name="x_small_font_size">16sp</dimen>
+    <dimen name="small_font_size">20sp</dimen>
+    <dimen name="medium_font_size">24sp</dimen>
+    <dimen name="large_font_size">28sp</dimen>
+    <dimen name="x_large_font_size">32sp</dimen>
+
+    <!-- padding values -->
+    <dimen name="x_small_padding">4dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="medium_padding">12dp</dimen>
+    <dimen name="large_padding">16dp</dimen>
+    <dimen name="x_large_padding">20dp</dimen>
+
+    <!--Min height values-->
+    <dimen name="small_min_height">400dp</dimen>
+    <dimen name="medium_min_height">500dp</dimen>
+    <dimen name="large_min_height">600dp</dimen>
+
 </resources>
