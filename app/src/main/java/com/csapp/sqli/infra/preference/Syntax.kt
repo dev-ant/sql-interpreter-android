@@ -144,8 +144,6 @@ class Syntax {
                         May you find forgiveness for yourself and forgive others.
                         May you share freely, never taking more than you give.
             """
-
-
     }
 
     // Data Manipulation Language (DML) Statements

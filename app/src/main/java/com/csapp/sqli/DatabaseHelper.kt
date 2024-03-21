@@ -8,12 +8,15 @@ import android.util.Log
 
 class DatabaseHelper(context: Context?) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
-
     override fun onCreate(p0: SQLiteDatabase?) {
         // Not yet implemented
     }
 
-    override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
+    override fun onUpgrade(
+        p0: SQLiteDatabase?,
+        p1: Int,
+        p2: Int,
+    ) {
         // Not yet implemented
     }
 
