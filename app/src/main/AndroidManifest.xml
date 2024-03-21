@@ -14,9 +14,6 @@
         android:windowSoftInputMode="adjustNothing"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.EditorActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat"
