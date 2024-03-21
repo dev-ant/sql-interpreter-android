@@ -10,7 +10,6 @@ import com.csapp.sqli.utils.EditorUtils
 import com.csapp.sqli.viewmodel.EditorViewModel
 
 class EditorActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityEditorBinding
     private lateinit var databaseHelper: DatabaseHelper
     private lateinit var viewModel: EditorViewModel
@@ -27,19 +26,31 @@ class EditorActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        binding.edittextQueryEditor.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                // "Not yet implemented"
-            }
+        binding.edittextQueryEditor.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    p0: CharSequence?,
+                    p1: Int,
+                    p2: Int,
+                    p3: Int,
+                ) {
+                    // "Not yet implemented"
+                }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                // "Not yet implemented"
-            }
+                override fun onTextChanged(
+                    p0: CharSequence?,
+                    p1: Int,
+                    p2: Int,
+                    p3: Int,
+                ) {
+                    // "Not yet implemented"
+                }
 
-            override fun afterTextChanged(p0: Editable?) {
-                EditorUtils.setEditorLiner(binding)
-            }
-        })
+                override fun afterTextChanged(p0: Editable?) {
+                    EditorUtils.setEditorLiner(binding)
+                }
+            },
+        )
 
         binding.btnQueryEditorRun.setOnClickListener {
             val sql = binding.edittextQueryEditor.text.toString()
