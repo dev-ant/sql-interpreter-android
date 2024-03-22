@@ -4,10 +4,14 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.csapp.sqli.DatabaseHelper
+import com.csapp.sqli.R
 import com.csapp.sqli.databinding.ActivityEditorBinding
 import com.csapp.sqli.utils.EditorUtils
 import com.csapp.sqli.viewmodel.EditorViewModel
+import com.csapp.sqli.viewmodel.EditorViewModelFactory
 
 class EditorActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditorBinding
@@ -16,12 +20,12 @@ class EditorActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityEditorBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        viewModel = ViewModelProvider(this, EditorViewModelFactory(this))[EditorViewModel::class.java]
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_editor)
+        binding.lifecycleOwner = this
+        binding.editorViewModel = viewModel
 
         databaseHelper = DatabaseHelper(this)
-        viewModel = EditorViewModel(databaseHelper)
-
         setupListeners()
     }
 
