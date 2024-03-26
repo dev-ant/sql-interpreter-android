@@ -16,5 +16,6 @@
 local.properties
 /keystore
 /app/build
+/app/release
 /out
 /captures
