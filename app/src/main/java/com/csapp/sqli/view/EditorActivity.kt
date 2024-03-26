@@ -20,5 +20,6 @@ class EditorActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_editor)
         binding.lifecycleOwner = this
         binding.editorViewModel = viewModel
+        viewModel.inputQuery.value = binding.edittextQueryEditor
     }
 }
