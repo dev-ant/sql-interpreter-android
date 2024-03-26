@@ -3,10 +3,10 @@ package com.csapp.sqli.viewmodel
 import android.widget.EditText
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.csapp.sqli.DatabaseHelper
+import com.csapp.sqli.repository.DatabaseRepository
 import com.csapp.sqli.model.LineNumber
 
-class EditorViewModel(private val databaseHelper: DatabaseHelper) : ViewModel() {
+class EditorViewModel(private val databaseRepository: DatabaseRepository) : ViewModel() {
 
     private val lineNumberModel = LineNumber("")
     val inputQuery = MutableLiveData<EditText>()
@@ -20,9 +20,9 @@ class EditorViewModel(private val databaseHelper: DatabaseHelper) : ViewModel() 
     fun executeQuery(sql: String): Any? {
         return inputQuery.value?.let {
             if (isStartWithSELECT(inputQuery.value.toString())) {
-                databaseHelper.execQueryReturn(it.text.toString())
+                databaseRepository.execQueryReturn(it.text.toString())
             } else {
-                databaseHelper.execQueryNoReturn(it.text.toString())
+                databaseRepository.execQueryNoReturn(it.text.toString())
             }
         }
     }
