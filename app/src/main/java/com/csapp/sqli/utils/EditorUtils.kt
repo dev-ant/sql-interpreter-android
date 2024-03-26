@@ -9,7 +9,6 @@ import com.csapp.sqli.utils.ViewUtils.addViewWithParams
 import com.csapp.sqli.utils.ViewUtils.applyCommonProperties
 
 object EditorUtils {
-
     fun displayResultOrMessage(
         binding: ActivityEditorBinding,
         result: Any?,

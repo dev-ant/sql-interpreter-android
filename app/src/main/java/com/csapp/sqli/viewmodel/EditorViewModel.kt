@@ -3,11 +3,10 @@ package com.csapp.sqli.viewmodel
 import android.widget.EditText
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.csapp.sqli.repository.DatabaseRepository
 import com.csapp.sqli.model.LineNumber
+import com.csapp.sqli.repository.DatabaseRepository
 
 class EditorViewModel(private val databaseRepository: DatabaseRepository) : ViewModel() {
-
     private val lineNumberModel = LineNumber("")
     val inputQuery = MutableLiveData<EditText>()
     val lineNumber = MutableLiveData<String>()
