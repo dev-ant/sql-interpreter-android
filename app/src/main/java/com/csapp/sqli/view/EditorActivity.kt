@@ -21,5 +21,6 @@ class EditorActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.editorViewModel = viewModel
         viewModel.inputQuery.value = binding.edittextQueryEditor
+        viewModel.resultTable.value = binding.tableQueryExecuteResult
     }
 }

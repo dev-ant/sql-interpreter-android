@@ -10,23 +10,6 @@ import com.csapp.sqli.utils.ViewUtils.addViewWithParams
 import com.csapp.sqli.utils.ViewUtils.applyCommonProperties
 
 object EditorUtils {
-    fun setEditorLiner(binding: ActivityEditorBinding) {
-        val text = binding.edittextQueryEditor.text
-        try {
-            val count =
-                binding.edittextQueryEditor.layout
-                    .getLineForOffset(text.length) + 1
-            val stringBuilder = StringBuilder()
-
-            for (i in 1..count) {
-                stringBuilder.append("$i\n")
-            }
-            binding.textviewQueryEditorLiner.text = stringBuilder.toString()
-        } catch (e: Exception) {
-            binding.textviewQueryEditorLiner.text = "1"
-            Log.e("EDITOR", "${e.message}")
-        }
-    }
 
     fun displayResultOrMessage(
         binding: ActivityEditorBinding,
