@@ -2,7 +2,6 @@ package com.csapp.sqli.utils
 
 import android.annotation.SuppressLint
 import android.database.Cursor
-import android.util.Log
 import android.widget.TableRow
 import android.widget.TextView
 import com.csapp.sqli.databinding.ActivityEditorBinding

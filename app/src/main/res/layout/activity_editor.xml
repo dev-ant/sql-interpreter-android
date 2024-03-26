@@ -99,7 +99,6 @@
                 android:paddingHorizontal="@dimen/medium_padding">
 
                 <Button
-                    android:onClick="@{() -> editorViewModel.runOnClick()}"
                     android:id="@+id/btn_query_editor_run"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

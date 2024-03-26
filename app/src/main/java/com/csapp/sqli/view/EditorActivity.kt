@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.csapp.sqli.R
 import com.csapp.sqli.databinding.ActivityEditorBinding
+import com.csapp.sqli.utils.EditorUtils
 import com.csapp.sqli.viewmodel.EditorViewModel
 import com.csapp.sqli.viewmodel.EditorViewModelFactory
 
@@ -21,6 +22,10 @@ class EditorActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.editorViewModel = viewModel
         viewModel.inputQuery.value = binding.edittextQueryEditor
-        viewModel.resultTable.value = binding.tableQueryExecuteResult
+        binding.btnQueryEditorRun.setOnClickListener {
+            val sql = binding.edittextQueryEditor.text.toString()
+            val result = viewModel.executeQuery(sql)
+            EditorUtils.displayResultOrMessage(binding, result)
+        }
     }
 }
