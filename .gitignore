@@ -1,21 +1,39 @@
-*.iml
+# Build outputs
+*.apk
+*.ap_
+*.aab
+
+# Heap dump files
+*.hprof
+
+# Log files
 *.log
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+
+# Gradle
+.gradle/
+/build/
+
+
+# Android Studio
+.idea/
+.gradle/
+/*/local.properties
+/*/build/
+/*/captures/
+/.externalNativeBuild/
+/.cxx/
+
+# Interllij
+*.iml
+
+# MacOS
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
+
+# Library files
+*.jks
+
+# Key store files
 /keystore
-/app/build
-/app/release
-/out
-/captures
+
+# Local prorperties
+local.properties
