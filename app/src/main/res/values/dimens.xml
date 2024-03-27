@@ -23,4 +23,7 @@
     <dimen name="medium_min_height">500dp</dimen>
     <dimen name="large_min_height">600dp</dimen>
 
+    <!--Splash screen-->
+    <dimen name="splash_screen">400dp</dimen>
+    <dimen name="splash_screen_icon_size">120dp</dimen>
 </resources>

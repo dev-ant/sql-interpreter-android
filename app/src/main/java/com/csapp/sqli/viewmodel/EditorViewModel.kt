@@ -16,7 +16,7 @@ class EditorViewModel(private val databaseRepository: DatabaseRepository) : View
         lineNumber.value = lineNumberModel.content
     }
 
-    fun executeQuery(sql: String): Any? {
+    fun executeQuery(): Any? {
         return inputQuery.value?.let {
             if (isStartWithSELECT(inputQuery.value.toString())) {
                 databaseRepository.execQueryReturn(it.text.toString())

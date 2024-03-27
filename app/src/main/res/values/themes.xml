@@ -2,4 +2,12 @@
 <resources>
 
     <style name="Theme.SQlInterpreter" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.App" parent="@android:style/Theme.DeviceDefault" />
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_screen</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/Theme.AppCompat</item>
+    </style>
 </resources>

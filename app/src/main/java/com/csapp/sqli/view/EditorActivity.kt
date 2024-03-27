@@ -2,6 +2,7 @@ package com.csapp.sqli.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.csapp.sqli.R
@@ -15,6 +16,7 @@ class EditorActivity : AppCompatActivity() {
     private lateinit var viewModel: EditorViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         viewModel =
             ViewModelProvider(this, EditorViewModelFactory(this))[EditorViewModel::class.java]
@@ -23,8 +25,7 @@ class EditorActivity : AppCompatActivity() {
         binding.editorViewModel = viewModel
         viewModel.inputQuery.value = binding.edittextQueryEditor
         binding.btnQueryEditorRun.setOnClickListener {
-            val sql = binding.edittextQueryEditor.text.toString()
-            val result = viewModel.executeQuery(sql)
+            val result = viewModel.executeQuery()
             EditorUtils.displayResultOrMessage(binding, result)
         }
     }
