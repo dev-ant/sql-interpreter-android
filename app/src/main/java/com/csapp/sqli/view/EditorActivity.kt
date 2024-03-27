@@ -25,8 +25,7 @@ class EditorActivity : AppCompatActivity() {
         binding.editorViewModel = viewModel
         viewModel.inputQuery.value = binding.edittextQueryEditor
         binding.btnQueryEditorRun.setOnClickListener {
-            val sql = binding.edittextQueryEditor.text.toString()
-            val result = viewModel.executeQuery(sql)
+            val result = viewModel.executeQuery()
             EditorUtils.displayResultOrMessage(binding, result)
         }
     }
