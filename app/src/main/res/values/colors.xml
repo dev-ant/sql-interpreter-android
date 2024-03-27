@@ -10,6 +10,7 @@
     <color name="transparent">#00000000</color>
 
     <!-- SQLI Light Gray Theme Palette -->
+    <color name="splash_background">#1E1E1E</color>
     <color name="background">#FF2B2B2B</color>
     <color name="annotation">#555555</color>
     <color name="text">#FFE6E1DC</color>
