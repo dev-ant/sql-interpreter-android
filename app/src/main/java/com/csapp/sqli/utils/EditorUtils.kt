@@ -9,20 +9,20 @@ import com.csapp.sqli.utils.ViewUtils.addViewWithParams
 import com.csapp.sqli.utils.ViewUtils.applyCommonProperties
 
 object EditorUtils {
-    fun displayResultOrMessage(
+    fun renderResult(
         binding: ActivityEditorBinding,
-        result: Any?,
+        statementResult: Any?,
     ) {
-        result?.let { nonNullResult ->
+        statementResult?.let { nonNullResult ->
             when (nonNullResult) {
-                is Cursor -> displayResult(binding, nonNullResult)
-                is String -> displayMessage(binding, nonNullResult)
+                is Cursor -> renderQueryResult(binding, nonNullResult)
+                is String -> renderStatementResult(binding, nonNullResult)
             }
         }
     }
 
     @SuppressLint("Range")
-    private fun displayResult(
+    private fun renderQueryResult(
         binding: ActivityEditorBinding,
         cursor: Cursor,
     ) {
@@ -50,7 +50,7 @@ object EditorUtils {
         }
     }
 
-    private fun displayMessage(
+    private fun renderStatementResult(
         binding: ActivityEditorBinding,
         msg: String,
     ) {
