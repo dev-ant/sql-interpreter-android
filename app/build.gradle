@@ -9,6 +9,11 @@ android {
     namespace 'com.csapp.sqli'
     compileSdk 34
 
+    tasks.configureEach { task ->
+        if (task.name == 'preBuild') { // 원하는 빌드 task 이름을 여기에 지정
+            task.dependsOn copyPreCommitHook // 실행될 커스텀 task 이름을 여기에 지정
+        }
+    }
 
     defaultConfig {
         applicationId "com.csapp.sqli"
@@ -31,6 +36,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
@@ -38,7 +44,7 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
     buildFeatures {
         compose true
@@ -107,4 +113,12 @@ dependencies {
 
     // Ktlint dependency
     ktlintRuleset 'io.nlopez.compose.rules:ktlint:0.3.12'
+}
+
+tasks.register('copyPreCommitHook', Copy.class) {
+    description = 'Copy pre-commit git hook from the scripts to the .git/hooks folder.'
+    group = 'git hooks'
+    outputs.upToDateWhen { false }
+    from '../scripts/pre-commit'
+    into '../.git/hooks'
 }
