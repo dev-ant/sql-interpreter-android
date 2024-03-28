@@ -20,11 +20,11 @@ class DatabaseRepository(context: Context?) :
         // Not yet implemented
     }
 
-    fun execQueryNoReturn(sql: String): String {
+    fun execStatement(statement: String): String {
         val database = this.writableDatabase
         return try {
-            database.execSQL(sql)
-            Log.i(TAG, MSG.SUCCESS + sql)
+            database.execSQL(statement)
+            Log.i(TAG, MSG.SUCCESS + statement)
             MSG.SUCCESS
         } catch (e: Exception) {
             Log.e(TAG, MSG.ERROR + e.message)
@@ -35,7 +35,7 @@ class DatabaseRepository(context: Context?) :
     }
 
     @SuppressLint("Recycle")
-    fun execQueryReturn(sql: String): Any {
+    fun execQuery(sql: String): Any {
         val database = this.readableDatabase
         return try {
             val cursor = database.rawQuery(sql, null)

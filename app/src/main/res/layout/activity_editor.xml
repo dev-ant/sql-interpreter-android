@@ -44,7 +44,7 @@
                     android:lineSpacingExtra="@dimen/x_small_padding"
                     android:minWidth="@dimen/large_padding"
                     android:paddingTop="@dimen/small_padding"
-                    android:text="@{editorViewModel.lineNumber}"
+                    android:text="@{editorViewModel.lineNumberView}"
                     android:textColor="@color/annotation"
                     android:textSize="@dimen/medium_font_size" />
 
@@ -59,7 +59,7 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:gravity="top"
-                    android:afterTextChanged="@{() -> editorViewModel.onTextChanged()}"
+                    android:afterTextChanged="@{() -> editorViewModel.onStatementChanged()}"
                     android:hint="@string/editor_hint"
                     android:lineSpacingExtra="@dimen/x_small_padding"
                     android:paddingStart="@dimen/large_padding"
