@@ -12,8 +12,12 @@ class EditorViewModel(private val databaseRepository: DatabaseRepository) : View
     val lineNumberView = MutableLiveData<String>()
 
     fun onStatementChanged() {
-        lineNumberModel.content = generateLineNumber()
-        lineNumberView.value = lineNumberModel.content
+        val editText = statementEditView.value
+        val layout = editText?.layout
+        layout?.let {
+            lineNumberModel.content = generateLineNumber(it.lineCount)
+            lineNumberView.value = lineNumberModel.content
+        }
     }
 
     fun execStatement(): Any? {
@@ -30,12 +34,9 @@ class EditorViewModel(private val databaseRepository: DatabaseRepository) : View
         return statement.startsWith("SELECT") or statement.startsWith("select")
     }
 
-    private fun generateLineNumber(): String {
-        val editText = statementEditView.value
-        val layout = editText?.layout
-        val count = layout?.lineCount
+    private fun generateLineNumber(count: Int): String {
         val stringBuilder = StringBuilder()
-        for (i in 1..count!!) {
+        for (i in 1..count) {
             stringBuilder.append("$i\n")
         }
         return stringBuilder.toString()
