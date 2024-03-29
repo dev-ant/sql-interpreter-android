@@ -10,8 +10,8 @@ android {
     compileSdk 34
 
     tasks.configureEach { task ->
-        if (task.name == 'preBuild') { // 원하는 빌드 task 이름을 여기에 지정
-            task.dependsOn copyPreCommitHook // 실행될 커스텀 task 이름을 여기에 지정
+        if (task.name == 'preBuild') {
+            task.dependsOn copyPreCommitHook
         }
     }
 
@@ -20,7 +20,7 @@ android {
         minSdk 29
         targetSdk 34
         versionCode 3
-        versionName "Alpha"
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
