@@ -8,7 +8,7 @@ import com.csapp.sqli.repository.DatabaseRepository
 
 class EditorViewModel(private val databaseRepository: DatabaseRepository) : ViewModel() {
     private val lineNumberModel = LineNumber("")
-    val statementEditView = MutableLiveData<EditText>()
+    var statementEditView = MutableLiveData<EditText>()
     val lineNumberView = MutableLiveData<String>()
 
     fun onStatementChanged() {
