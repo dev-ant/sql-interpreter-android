@@ -1,7 +1,6 @@
 package com.csapp.sqli.viewmodel
 
 import android.text.Layout
-import android.util.Log
 import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,15 +17,13 @@ class EditorViewModel(private val databaseRepository: DatabaseRepository) : View
     private val _textViewLineNumber = MutableLiveData<String>()
     val textViewLineNumber: LiveData<String> = _textViewLineNumber
 
-    // Data binding with Activity_editor.xml #EditText afterTextChanged()
+    // Data binding with Activity_editor.xml #afterTextChanged()
     fun onStatementChanged() {
         val editText = editTextStatement.value
-        val layout = editText?.layout
-        layout?.let {
-            updateLineNumbers(it)
-        }
+        editText?.layout?.let { updateLineNumbers(it) }
     }
 
+    // If line number changed, update model and render line number text view
     private fun updateLineNumbers(it: Layout) {
         if (it.lineCount != modelLineNumber.number) {
             modelLineNumber.content = generateLineNumber(it.lineCount)
@@ -35,9 +32,9 @@ class EditorViewModel(private val databaseRepository: DatabaseRepository) : View
         }
     }
 
-    // Activity_editor.xml과 data binding #버튼 클릭시 실행
+    // View binding with Activity_editor.xml, Check Editor Activity
     fun execStatement(): Any? {
-        return editTextStatement.value?.let {
+        return _editTextStatement.value?.let {
             if (isQueryStatement(editTextStatement.value.toString())) {
                 databaseRepository.execQuery(it.text.toString())
             } else {
@@ -46,12 +43,12 @@ class EditorViewModel(private val databaseRepository: DatabaseRepository) : View
         }
     }
 
-    // SQL문이 쿼리인지 검증. 즉 SELECT로 시작하는지 확인
+    // Check if a statement starts with "SELECT" ignore case
     private fun isQueryStatement(statement: String): Boolean {
-        return statement.startsWith("SELECT") or statement.startsWith("select")
+        return statement.startsWith("SELECT", ignoreCase = true)
     }
 
-    // Line Count를 입력받으면 Line Number을 생성
+    // Generate line number like ""1/n2/n3/n ... count"
     private fun generateLineNumber(count: Int): String {
         val stringBuilder = StringBuilder()
         for (i in 1..count) {
