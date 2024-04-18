@@ -1,6 +1,7 @@
 package com.csapp.sqli.viewmodel
 
 import android.widget.EditText
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.csapp.sqli.model.LineNumber
@@ -8,8 +9,12 @@ import com.csapp.sqli.repository.DatabaseRepository
 
 class EditorViewModel(private val databaseRepository: DatabaseRepository) : ViewModel() {
     private val lineNumberModel = LineNumber("")
-    var statementEditView = MutableLiveData<EditText>()
-    val lineNumberView = MutableLiveData<String>()
+
+    private val _editTextStatement = MutableLiveData<EditText>()
+    val editTextStatement: LiveData<EditText> = _editTextStatement
+
+    private val _textViewLineNumber = MutableLiveData<String>()
+    val lineNumberView:LiveData<String> = _textViewLineNumber
 
     fun onStatementChanged() {
         val editText = statementEditView.value
