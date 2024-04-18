@@ -44,7 +44,7 @@
                     android:lineSpacingExtra="@dimen/x_small_padding"
                     android:minWidth="@dimen/large_padding"
                     android:paddingTop="@dimen/small_padding"
-                    android:text="@{editorViewModel.lineNumberView}"
+                    android:text="@{editorViewModel.textViewLineNumber}"
                     android:textColor="@color/annotation"
                     android:textSize="@dimen/medium_font_size" />
 
