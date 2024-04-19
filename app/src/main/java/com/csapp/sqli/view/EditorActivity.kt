@@ -23,7 +23,7 @@ class EditorActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_editor)
         binding.lifecycleOwner = this
         binding.editorViewModel = viewModel
-        viewModel.statementEditView.value = binding.edittextQueryEditor
+        viewModel.editTextStatement.value = binding.edittextQueryEditor
         binding.btnQueryEditorRun.setOnClickListener {
             val result = viewModel.execStatement()
             EditorUtils.renderResult(binding, result)
