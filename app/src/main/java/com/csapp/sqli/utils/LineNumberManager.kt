@@ -8,13 +8,12 @@ object LineNumberManager {
 
     // If line number changed, update model and render line number text view
     fun updateLineNumbers(it: Layout): String? {
-        return if (it.lineCount != modelLineNumber.number) {
+        if (it.lineCount != modelLineNumber.number) {
             modelLineNumber.content = generateLineNumber(it.lineCount)
             modelLineNumber.number = it.lineCount
-            modelLineNumber.content
-        } else {
-            null
+            return modelLineNumber.content
         }
+        return null
     }
 
     // Generate line number like ""1/n2/n3/n ... count"

@@ -1,5 +1,6 @@
 package com.csapp.sqli.viewmodel
 
+import android.text.Layout
 import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,10 +17,15 @@ class EditorViewModel(private val databaseRepository: DatabaseRepository) : View
 
     // Data binding with Activity_editor.xml #afterTextChanged()
     fun onStatementChanged() {
-        editTextStatement.value?.layout?.let {layout ->
-            LineNumberManager.updateLineNumbers(layout)?.let {lineNumber ->
-                _textViewLineNumber.value = lineNumber
-            }
+        editTextStatement.value?.layout?.let { layout ->
+            renderLineNumberView(layout)
+        }
+    }
+
+    // Render line number view when line number updated
+    private fun renderLineNumberView(layout: Layout) {
+        LineNumberManager.updateLineNumbers(layout)?.let { lineNumber ->
+            _textViewLineNumber.value = lineNumber
         }
     }
 
