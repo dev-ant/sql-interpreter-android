@@ -35,7 +35,7 @@ class EditorViewModel(private val databaseRepository: DatabaseRepository) : View
     // View binding with Activity_editor.xml, Check Editor Activity
     fun execStatement(): Any? {
         return _editTextStatement.value?.let {
-            if (isQueryStatement(editTextStatement.value.toString())) {
+            if (isSelectStatement(editTextStatement.value.toString())) {
                 databaseRepository.execQuery(it.text.toString())
             } else {
                 databaseRepository.execStatement(it.text.toString())
@@ -44,7 +44,7 @@ class EditorViewModel(private val databaseRepository: DatabaseRepository) : View
     }
 
     // Check if a statement starts with "SELECT" ignore case
-    private fun isQueryStatement(statement: String): Boolean {
+    private fun isSelectStatement(statement: String): Boolean {
         return statement.startsWith("SELECT", ignoreCase = true)
     }
 
