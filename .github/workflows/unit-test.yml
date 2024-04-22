@@ -1,12 +1,11 @@
 name: Android CI
 
 on:
-  push:
-    branches:
-      - dev
   pull_request:
     branches:
       - dev
+      - main
+      - release*
 
 jobs: 
   Unit-Test:
@@ -34,7 +33,7 @@ jobs:
 
       - name: Run unit tests
         run: |
-          ./gradlew testDebugUnitTest
+          ./gradlew test
 
       - name: Publish Test Results
         if: always()
