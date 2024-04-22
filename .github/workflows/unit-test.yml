@@ -1,12 +1,11 @@
 name: Android CI
 
 on:
-  push:
-    branches:
-      - dev
   pull_request:
     branches:
       - dev
+      - main
+      - release*
 
 jobs: 
   Unit-Test:
@@ -34,10 +33,10 @@ jobs:
 
       - name: Run unit tests
         run: |
-          ./gradlew testDebugUnitTest --tests com.csapp.sqli.viewmodel.EditorViewModelTest
+          ./gradlew test
 
       - name: Publish Test Results
         if: always()
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
-          files: "build/test-results/test/TEST-*.xml"
+          files: "app/build/test-results/testDebugUnitTest/TEST-*.xml"
