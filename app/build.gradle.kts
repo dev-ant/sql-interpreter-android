@@ -39,7 +39,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
             signingConfig = signingConfigs.getByName("debug")
         }
@@ -71,8 +71,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
+    implementation("androidx.core:core-ktx:1.13.0")
+    implementation("androidx.core:core-splashscreen:1.1.0-rc01")
     implementation("androidx.test.ext:junit-ktx:1.1.5")
 
     // Compose dependencies
@@ -94,7 +94,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
 
     // Activity dependencies
-    implementation("androidx.activity:activity-compose:1.8.2")
+    implementation("androidx.activity:activity-compose:1.9.0")
 
     // Test dependencies
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -120,7 +120,7 @@ dependencies {
     implementation("androidx.room:room-paging:$roomVersion")
 
     // Data Binding dependencies
-    implementation("androidx.databinding:databinding-runtime:8.3.1")
+    implementation("androidx.databinding:databinding-runtime:8.3.2")
 
     // Ktlint dependency
     ktlintRuleset("io.nlopez.compose.rules:ktlint:0.3.12")
