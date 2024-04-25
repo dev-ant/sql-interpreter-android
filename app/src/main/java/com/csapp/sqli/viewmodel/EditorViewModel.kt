@@ -25,12 +25,12 @@ class EditorViewModel(private val databaseRepository: DatabaseRepository) : View
     // Data binding with Activity_editor.xml #afterTextChanged()
     fun onStatementChanged() {
         editTextStatement.value?.layout?.let { layout ->
-            renderLineNumberView(layout)
+            updateLineNumberView(layout)
         }
     }
 
-    // Render line number view when line number updated
-    private fun renderLineNumberView(layout: Layout) {
+    // Update line number view when line number updated
+    private fun updateLineNumberView(layout: Layout) {
         LineNumberManager.updateLineNumbers(layout)?.let { lineNumber ->
             _textViewLineNumber.value = lineNumber
         }
@@ -42,6 +42,7 @@ class EditorViewModel(private val databaseRepository: DatabaseRepository) : View
             val statement = _editTextStatement.value?.text.toString()
             val result = databaseRepository.execStatement(statement)
             withContext(Dispatchers.Main) {
+                // Update statement result
                 _queryResult.value = result
             }
         }

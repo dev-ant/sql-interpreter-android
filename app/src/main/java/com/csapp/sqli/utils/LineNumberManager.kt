@@ -17,7 +17,7 @@ object LineNumberManager {
     }
 
     // Generate line number like ""1/n2/n3/n ... count"
-    private fun generateLineNumber(count: Int): String {
+    fun generateLineNumber(count: Int): String {
         return buildString {
             for (i in 1..count) {
                 append("$i\n")
