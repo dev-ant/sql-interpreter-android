@@ -5,6 +5,8 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class DatabaseRepository(context: Context?) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -20,31 +22,52 @@ class DatabaseRepository(context: Context?) :
         // Not yet implemented
     }
 
-    fun execStatement(statement: String): String {
-        val database = this.writableDatabase
-        return try {
-            database.execSQL(statement)
-            Log.i(TAG, MSG.SUCCESS + statement)
-            MSG.SUCCESS
-        } catch (e: Exception) {
-            Log.e(TAG, MSG.ERROR + e.message)
-            MSG.ERROR + e.message
-        } finally {
-            database.close()
+    suspend fun execStatement(statement: String): Any =
+        withContext(Dispatchers.IO) {
+            return@withContext try {
+                if (isSelectStatement(statement)) {
+                    execSelectStatement(statement)
+                } else {
+                    execNonSelectStatement(statement)
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, MSG.ERROR + e.message)
+                MSG.ERROR + e.message
+            }
         }
-    }
+
+    private suspend fun execNonSelectStatement(statement: String): String =
+        withContext(Dispatchers.IO) {
+            val database = writableDatabase
+            return@withContext try {
+                database.execSQL(statement)
+                Log.i(TAG, MSG.SUCCESS + statement)
+                MSG.SUCCESS
+            } catch (e: Exception) {
+                Log.e(TAG, MSG.ERROR + e.message)
+                MSG.ERROR + e.message
+            } finally {
+                database.close()
+            }
+        }
 
     @SuppressLint("Recycle")
-    fun execQuery(sql: String): Any {
-        val database = this.readableDatabase
-        return try {
-            val cursor = database.rawQuery(sql, null)
-            Log.i(TAG, MSG.SUCCESS)
-            cursor
-        } catch (e: Exception) {
-            Log.e(TAG, MSG.ERROR + "${e.message}")
-            MSG.ERROR + e.message
+    private suspend fun execSelectStatement(sql: String): Any =
+        withContext(Dispatchers.IO) {
+            val database = readableDatabase
+            return@withContext try {
+                val cursor = database.rawQuery(sql, null)
+                Log.i(TAG, MSG.SUCCESS)
+                cursor
+            } catch (e: Exception) {
+                Log.e(TAG, MSG.ERROR + "${e.message}")
+                MSG.ERROR + e.message
+            }
         }
+
+    // Check if a statement starts with "SELECT" ignore case
+    private fun isSelectStatement(statement: String): Boolean {
+        return statement.startsWith("SELECT", ignoreCase = true)
     }
 
     companion object {

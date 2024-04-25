@@ -24,9 +24,13 @@ class EditorActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.editorViewModel = viewModel
         viewModel.editTextStatement.value = binding.edittextQueryEditor
-        binding.btnQueryEditorRun.setOnClickListener {
-            val result = viewModel.execStatement()
+
+        viewModel.queryResult.observe(this) { result ->
             EditorUtils.renderResult(binding, result)
+        }
+
+        binding.btnQueryEditorRun.setOnClickListener {
+            viewModel.execStatement()
         }
     }
 }
