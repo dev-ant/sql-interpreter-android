@@ -22,32 +22,34 @@ class DatabaseRepository(context: Context?) :
         // Not yet implemented
     }
 
-    suspend fun execStatement(statement: String): String = withContext(Dispatchers.IO) {
-        val database = writableDatabase
-        return@withContext try {
-            database.execSQL(statement)
-            Log.i(TAG, MSG.SUCCESS + statement)
-            MSG.SUCCESS
-        } catch (e: Exception) {
-            Log.e(TAG, MSG.ERROR + e.message)
-            MSG.ERROR + e.message
-        } finally {
-            database.close()
+    suspend fun execStatement(statement: String): String =
+        withContext(Dispatchers.IO) {
+            val database = writableDatabase
+            return@withContext try {
+                database.execSQL(statement)
+                Log.i(TAG, MSG.SUCCESS + statement)
+                MSG.SUCCESS
+            } catch (e: Exception) {
+                Log.e(TAG, MSG.ERROR + e.message)
+                MSG.ERROR + e.message
+            } finally {
+                database.close()
+            }
         }
-    }
 
     @SuppressLint("Recycle")
-    suspend fun execQuery(sql: String): Any = withContext(Dispatchers.IO) {
-        val database = readableDatabase
-        return@withContext try {
-            val cursor = database.rawQuery(sql, null)
-            Log.i(TAG, MSG.SUCCESS)
-            cursor
-        } catch (e: Exception) {
-            Log.e(TAG, MSG.ERROR + "${e.message}")
-            MSG.ERROR + e.message
+    suspend fun execSelectStatement(sql: String): Any =
+        withContext(Dispatchers.IO) {
+            val database = readableDatabase
+            return@withContext try {
+                val cursor = database.rawQuery(sql, null)
+                Log.i(TAG, MSG.SUCCESS)
+                cursor
+            } catch (e: Exception) {
+                Log.e(TAG, MSG.ERROR + "${e.message}")
+                MSG.ERROR + e.message
+            }
         }
-    }
 
     companion object {
         private const val TAG = "DB_HELPER"

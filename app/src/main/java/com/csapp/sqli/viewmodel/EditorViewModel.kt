@@ -39,15 +39,16 @@ class EditorViewModel(private val databaseRepository: DatabaseRepository) : View
     // View binding with Activity_editor.xml, Check Editor Activity
     fun execStatement(): Any? {
         return viewModelScope.launch(Dispatchers.IO) {
-            val result = withContext(Dispatchers.IO) {
-                _editTextStatement.value?.let {
-                    if (isSelectStatement(editTextStatement.value.toString())) {
-                        databaseRepository.execQuery(it.text.toString())
-                    } else {
-                        databaseRepository.execStatement(it.text.toString())
+            val result =
+                withContext(Dispatchers.IO) {
+                    _editTextStatement.value?.let {
+                        if (isSelectStatement(editTextStatement.value.toString())) {
+                            databaseRepository.execSelectStatement(it.text.toString())
+                        } else {
+                            databaseRepository.execStatement(it.text.toString())
+                        }
                     }
                 }
-            }
             withContext(Dispatchers.Main) {
                 _queryResult.value = result
             }
