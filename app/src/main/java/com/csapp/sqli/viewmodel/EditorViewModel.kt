@@ -5,8 +5,12 @@ import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.csapp.sqli.repository.DatabaseRepository
 import com.csapp.sqli.utils.LineNumberManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class EditorViewModel(private val databaseRepository: DatabaseRepository) : ViewModel() {
     private val _editTextStatement = MutableLiveData<EditText>()
@@ -14,6 +18,9 @@ class EditorViewModel(private val databaseRepository: DatabaseRepository) : View
 
     private val _textViewLineNumber = MutableLiveData<String>()
     val textViewLineNumber: LiveData<String> = _textViewLineNumber
+
+    private val _queryResult = MutableLiveData<Any?>()
+    val queryResult: LiveData<Any?> = _queryResult
 
     // Data binding with Activity_editor.xml #afterTextChanged()
     fun onStatementChanged() {
@@ -31,11 +38,18 @@ class EditorViewModel(private val databaseRepository: DatabaseRepository) : View
 
     // View binding with Activity_editor.xml, Check Editor Activity
     fun execStatement(): Any? {
-        return _editTextStatement.value?.let {
-            if (isSelectStatement(editTextStatement.value.toString())) {
-                databaseRepository.execQuery(it.text.toString())
-            } else {
-                databaseRepository.execStatement(it.text.toString())
+        return viewModelScope.launch(Dispatchers.IO) {
+            val result = withContext(Dispatchers.IO) {
+                _editTextStatement.value?.let {
+                    if (isSelectStatement(editTextStatement.value.toString())) {
+                        databaseRepository.execQuery(it.text.toString())
+                    } else {
+                        databaseRepository.execStatement(it.text.toString())
+                    }
+                }
+            }
+            withContext(Dispatchers.Main) {
+                _queryResult.value = result
             }
         }
     }
