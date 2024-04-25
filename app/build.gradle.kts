@@ -124,6 +124,9 @@ dependencies {
 
     // Ktlint dependency
     ktlintRuleset("io.nlopez.compose.rules:ktlint:0.3.12")
+
+    // Coroutine dependency
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 }
 
 tasks.register<Copy>("copyPreCommitHook") {
