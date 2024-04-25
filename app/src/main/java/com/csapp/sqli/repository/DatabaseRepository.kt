@@ -22,7 +22,21 @@ class DatabaseRepository(context: Context?) :
         // Not yet implemented
     }
 
-    suspend fun execStatement(statement: String): String =
+    suspend fun execStatement(statement: String): Any =
+        withContext(Dispatchers.IO) {
+            return@withContext try {
+                if (isSelectStatement(statement)) {
+                    execSelectStatement(statement)
+                } else {
+                    execNonSelectStatement(statement)
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, MSG.ERROR + e.message)
+                MSG.ERROR + e.message
+            }
+        }
+
+    private suspend fun execNonSelectStatement(statement: String): String =
         withContext(Dispatchers.IO) {
             val database = writableDatabase
             return@withContext try {
@@ -38,7 +52,7 @@ class DatabaseRepository(context: Context?) :
         }
 
     @SuppressLint("Recycle")
-    suspend fun execSelectStatement(sql: String): Any =
+    private suspend fun execSelectStatement(sql: String): Any =
         withContext(Dispatchers.IO) {
             val database = readableDatabase
             return@withContext try {
@@ -50,6 +64,11 @@ class DatabaseRepository(context: Context?) :
                 MSG.ERROR + e.message
             }
         }
+
+    // Check if a statement starts with "SELECT" ignore case
+    private fun isSelectStatement(statement: String): Boolean {
+        return statement.startsWith("SELECT", ignoreCase = true)
+    }
 
     companion object {
         private const val TAG = "DB_HELPER"
